@@ -35,6 +35,7 @@
 
 #include "timer_handler.h"
 #include "em_timer.h"
+#include "em_gpio.h"
 
 #include "loglevels.h"
 #define __MODUUL__ "main"
