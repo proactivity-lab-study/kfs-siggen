@@ -34,6 +34,7 @@
 #include "logger_fwrite.h"
 
 #include "timer_handler.h"
+#include "em_timer.h"
 
 #include "loglevels.h"
 #define __MODUUL__ "main"
@@ -49,7 +50,12 @@ void hp_loop ()
 {
     #define HB_DELAY 10 // Heartbeat message delay, seconds
     
+    // TODO Configure LED pin.
+    // TODO Configure vibro-motor pin.
     // TODO Initialize Timer.
+    
+    // TODO Create thread to control LEDs.
+    // TODO Create thread to control vibromotor.
     
     for (;;)
     {

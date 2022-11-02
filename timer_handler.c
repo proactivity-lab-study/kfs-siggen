@@ -15,12 +15,29 @@
 #include "timer_handler.h"
 
 /**
+ * @brief Init GPIO and configure LED pins. 
+ */
+void led_pin_init(void)
+{
+	// Enable clocks.
+    CMU_ClockEnable(cmuClock_GPIO, true);
+
+    // TODO Init LED pins
+}
+
+/**
  * @brief Init TIMER0 to regulate PWM dutycycle. 
  */
-void timer0_init(void)
+uint32_t timer0_init(void)
 {
 	// Enable clocks.
     CMU_ClockEnable(cmuClock_TIMER0, true);
 
-    // TODO Init
+    // TODO Configure CC to compare mode, toggle action
+    // TODO Route timer output(action) to LED pin
+    // TODO Configure Timer
+    
+    return 0;
 }
+
+
