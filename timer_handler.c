@@ -22,7 +22,8 @@ void led_pin_init(void)
 	// Enable clocks.
     CMU_ClockEnable(cmuClock_GPIO, true);
 
-    // TODO Init LED pins
+    // Init LED pins
+    GPIO_PinModeSet(KFS_LED2_PORT, 5, gpioModePushPull, 0);
 }
 
 /**
@@ -33,7 +34,15 @@ uint32_t timer0_init(void)
 	// Enable clocks.
     CMU_ClockEnable(cmuClock_TIMER0, true);
 
-    // TODO Configure CC to compare mode, toggle action
+    // Configure CC to compare mode, toggle action
+    TIMER_InitCC_TypeDef ccInit = TIMER_INITCC_DEFAULT;
+	ccInit.mode = timerCCModeCompare;
+	ccInit.cmoa = timerOutputActionToggle;
+		
+	// Initilize a CC channels for toggling buzzer.
+	TIMER_InitCC(TIMER0, 0, &ccInit);
+	
+	
     // TODO Route timer output(action) to LED pin
     // TODO Configure Timer
     

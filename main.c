@@ -46,22 +46,42 @@
 #include "incbin.h"
 INCBIN(Header, "header.bin");
 
+void LED_control();
+
 // Heartbeat thread, initialize Timer and print heartbeat messages.
 void hp_loop ()
 {
     #define HB_DELAY 10 // Heartbeat message delay, seconds
     
-    // TODO Configure LED pin.
+    // Configure LED pin.
+    led_pin_init();
+    
     // TODO Configure vibro-motor pin.
     // TODO Initialize Timer.
     
-    // TODO Create thread to control LEDs.
+    // Create thread to control LEDs.
+    const osThreadAttr_t hp_thread_attr = { .name = "LED" };
+    osThreadNew(LED_control, NULL, &hp_thread_attr);
+    
     // TODO Create thread to control vibromotor.
     
     for (;;)
     {
         osDelay(HB_DELAY*osKernelGetTickFreq());
         info1("Heartbeat");
+    }
+}
+
+void LED_control()
+{
+    for(;;)
+    {
+        // turn LED on
+        GPIO_PinOutSet(KFS_LED2_PORT, 5);
+        // wait 1 sec
+        osDelay(1000);
+        // TODO switch LED to power save mode
+        // TODO wait 1 sec
     }
 }
 

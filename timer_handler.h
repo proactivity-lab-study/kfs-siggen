@@ -21,7 +21,7 @@
 
 #define KFS_LED0_LOCATION   TIMER_ROUTELOC0_CC0LOC_LOC7 // PB12 route location for CC channel 7
 #define KFS_LED1_LOCATION   TIMER_ROUTELOC0_CC0LOC_LOC6 // PB11 route location for CC channel 6
-#define KFS_LED2_LOCATION   TIMER_ROUTELOC0_CC0LOC_LOC5 // PA0 route location for CC channel 5
+#define KFS_LED2_LOCATION   TIMER_ROUTELOC0_CC0LOC_LOC5 // PA5 route location for CC channel 5
 
 #define LED_COUNTER_IF      0x01
 
