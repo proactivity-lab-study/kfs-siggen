@@ -55,7 +55,7 @@ uint32_t timer0_init_counter(void)
 	TIMER0->ROUTEPEN = TIMER_ROUTEPEN_CC0PEN;
 	
 	// Route timer output(action) to LED pin
-	TIMER0->ROUTELOC0 = KFS_LED2_LOCATION;
+	TIMER0->ROUTELOC0 = TIMER_ROUTELOC0_CC0LOC_LOC0;
 
 	// Set same TIMER0 top value for all CC channels.
 	TIMER_TopSet(TIMER0, 37500);
