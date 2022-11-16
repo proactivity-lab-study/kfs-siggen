@@ -88,11 +88,11 @@ void LED_control()
     {
         // turn LED on
         // GPIO_PinOutSet(KFS_LED2_PORT, 5);
-        set_top_val(10000);
+        //set_top_val(10000);
         // wait 1 sec
         osDelay(1000);
         // 
-        set_top_val(1);
+        //set_top_val(1);
         // wait 1 sec
         osDelay(1000);
     }
