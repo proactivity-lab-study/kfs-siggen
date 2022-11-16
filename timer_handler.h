@@ -25,20 +25,20 @@
 
 #define LED_COUNTER_IF      0x01
 
-// Vibromotor port and pin is PA0, timer compare-capture interface routing to PA0
-#define VIBROMOTOR_PORT             gpioPortA
-#define VIBROMOTOR_PIN              0
-#define VIBROMOTOR_CC_CHANNEL       0
-#define VIBROMOTOR_LOCATION         TIMER_ROUTELOC0_CC0LOC_LOC0 // PA0 route location for CC channel 0
+// Buzzer port and pin is PA0, timer compare-capture interface routing to PA0
+#define BUZZER_PORT             gpioPortA
+#define BUZZER_PIN              0
+#define BUZZER_CC_CHANNEL       0
+#define BUZZER_LOCATION         TIMER_ROUTELOC0_CC0LOC_LOC0 // PA0 route location for CC channel 0
 
 // PWM configuration parameters
-#define MOT_TIMER0_CLOCK_DIV        timerPrescale256 // Timer0 clock divider
-#define MOT_TIMER0_TOP_VAL      100
-#define MOT_PWM_DUTY_CYCLE      50
+#define BUZ_TIMER0_CLOCK_DIV        timerPrescale1024 // Timer0 clock divider
+#define BUZ_TIMER0_TOP_VAL      100
+#define BUZ_PWM_DUTY_CYCLE      50
 
 // Public functions
 void led_pin_init();
-void motor_pin_init();
+void buzzer_pin_init();
 
 uint32_t timer0_init_counter();
 uint32_t timer0_init_pwm();

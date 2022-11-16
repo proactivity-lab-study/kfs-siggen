@@ -46,7 +46,7 @@
 #include "incbin.h"
 INCBIN(Header, "header.bin");
 
-void LED_control();
+void Buzzer_control();
 void motor_control();
 
 // Heartbeat thread, initialize Timer and print heartbeat messages.
@@ -58,18 +58,18 @@ void hp_loop ()
     // Configure LED pin.
     led_pin_init();
     
-    // Configure vibro-motor pin.
-    motor_pin_init();
+    // Configure buzzer pin.
+    buzzer_pin_init();
     
     // Initialize Timer.
-    clock_freq = timer0_init_pwm();
-    //clock_freq = timer0_init_counter();
+    //clock_freq = timer0_init_pwm();
+    clock_freq = timer0_init_counter();
     
     info1("Timer 0 clock %lu", clock_freq);
     
     // Create thread to control LEDs.
-    const osThreadAttr_t led_thread_attr = { .name = "LED" };
-    osThreadNew(LED_control, NULL, &led_thread_attr);
+    const osThreadAttr_t led_thread_attr = { .name = "Buzzer" };
+    osThreadNew(Buzzer_control, NULL, &led_thread_attr);
     
     // Create thread to control vibromotor.
     const osThreadAttr_t motor_thread_attr = { .name = "motor" };
@@ -82,29 +82,30 @@ void hp_loop ()
     }
 }
 
-void LED_control()
+void Buzzer_control()
 {
     for(;;)
     {
-        // turn LED on
-        // GPIO_PinOutSet(KFS_LED2_PORT, 5);
-        //set_top_val(10000);
-        // wait 1 sec
-        osDelay(1000);
-        // 
-        //set_top_val(1);
-        // wait 1 sec
-        osDelay(1000);
+        // Silence + two different frequencies
+        set_top_val(18750);
+        osDelay(2000); // wait 2 sec
+        
+        set_top_val(1875);
+        osDelay(2000); // wait 2 sec
+        
+        set_top_val(187);
+        osDelay(2000); // wait 2 sec
     }
 }
 
+// Not using motor!
 void motor_control()
 {
     for(;;)
     {
-        set_duty_cycle(95);
+        //set_duty_cycle(95);
         osDelay(1000);
-        set_duty_cycle(0);
+        //set_duty_cycle(0);
         osDelay(1000);
     }
 }
