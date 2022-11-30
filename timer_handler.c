@@ -58,13 +58,13 @@ uint32_t timer0_init_counter(void)
 	TIMER0->ROUTELOC0 = TIMER_ROUTELOC0_CC0LOC_LOC0;
 
 	// Set same TIMER0 top value for all CC channels.
-	TIMER_TopSet(TIMER0, 37500);
+	TIMER_TopSet(TIMER0, 0);
 
 	// TIMER general init
     // https://docs.silabs.com/mcu/latest/efr32mg12/structTIMER-Init-TypeDef
 	TIMER_Init_TypeDef timerInit = TIMER_INIT_DEFAULT;
 	timerInit.prescale = BUZ_TIMER0_CLOCK_DIV;
-	timerInit.enable = true; // Start timer after init.
+	timerInit.enable = false; // Start timer after init.
 
 	TIMER_Init(TIMER0, &timerInit);
 	
@@ -75,6 +75,12 @@ uint32_t timer0_init_counter(void)
 void set_top_val(uint32_t topVal)
 {
     TIMER_TopBufSet(TIMER0, topVal);
+    TIMER_Enable(TIMER0, true);
+}
+
+void timer_stop()
+{
+    TIMER_Enable(TIMER0, false);
 }
 
 uint32_t timer0_init_pwm(void)

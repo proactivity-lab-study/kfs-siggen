@@ -44,7 +44,7 @@ uint32_t timer0_init_counter();
 uint32_t timer0_init_pwm();
 
 void start_timer(uint32_t topVal);
-void stop_timer();
+void timer_stop();
 void set_top_val(uint32_t topVal);
 
 void set_duty_cycle(uint32_t dc);

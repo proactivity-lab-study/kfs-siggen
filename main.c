@@ -20,6 +20,7 @@
  */
 #include <stdio.h>
 #include <stdint.h>
+#include <stdlib.h>
 #include <string.h>
 #include <inttypes.h>
 
@@ -48,6 +49,7 @@ INCBIN(Header, "header.bin");
 
 void Buzzer_control();
 void motor_control();
+static uint32_t randomNumber(uint32_t rndL, uint32_t rndH);
 
 // Heartbeat thread, initialize Timer and print heartbeat messages.
 void hp_loop ()
@@ -84,17 +86,22 @@ void hp_loop ()
 
 void Buzzer_control()
 {
+    srand(osKernelGetTickCount()); // Initialise random number generator
+    
     for(;;)
     {
         // Silence + two different frequencies
-        set_top_val(18750);
-        osDelay(2000); // wait 2 sec
+        set_top_val(119);
+        osDelay(4000); // wait 4 sec
         
-        set_top_val(1875);
-        osDelay(2000); // wait 2 sec
+        timer_stop();
+        osDelay(randomNumber(2000, 4000));
         
-        set_top_val(187);
-        osDelay(2000); // wait 2 sec
+        set_top_val(44);
+        osDelay(4000); // wait 4 sec
+        
+        timer_stop();
+        osDelay(randomNumber(2000, 4000));
     }
 }
 
@@ -149,4 +156,10 @@ int main ()
     }
 
     for(;;);
+}
+
+static uint32_t randomNumber(uint32_t rndL, uint32_t rndH)
+{
+	uint32_t range = rndH + 1 - rndL;
+	return rand() % range + rndL;
 }
